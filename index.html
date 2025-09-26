@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <!-- <meta name="description" content="DESCRIPTION META TAG"> -->
+    <meta property="og:title"
+        content="EditMGT: Unleashing the Potential of Masked Generative Transformer in Image Editing" />
+    <!-- <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG" /> -->
+    <meta property="og:url" content="https://weichow23.github.io/editmgt/" />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content="static/images/banner.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>EditMGT</title>
+    <link rel="icon" type="image/x-icon" href="static/images/icon.png">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <style>
+        :root {
+            --mgt-red: rgb(255, 46, 99);
+            --mgt-dark: rgb(37, 42, 52);
+            --mgt-blue: rgb(8, 217, 214);
+            --mgt-gray: rgb(156, 156, 156);
+        }
+        
+        .editmgt-title {
+            font-weight: bold;
+            font-variant: small-caps;
+        }
+        
+        .edit-part { color: var(--mgt-dark); }
+        .m-part { color: var(--mgt-red); }
+        .g-part { color: var(--mgt-gray); }
+        .t-part { color: var(--mgt-blue); }
+        
+        .figure-caption {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            margin-top: 0.8rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            line-height: 1.4;
+            padding: 0 1rem;
+        }
+        
+        /* Enhanced image styling with better spacing */
+        .main-figure {
+            margin: 2.5rem 0 1rem 0;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-figure:hover {
+            transform: translateY(-2px);
+        }
+        
+        .main-figure img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .main-figure img:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .method-figure {
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        
+        .method-figure img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .method-figure img:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .dataset-figure {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .dataset-figure img {
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        .result-figure {
+            margin: 1.8rem 0 1rem 0;
+            text-align: center;
+        }
+        
+        .result-figure img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 3px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Enhanced content sections */
+        .content-section {
+            padding: 3rem 0;
+        }
+        
+        .content-section h2 {
+            margin-bottom: 2rem !important;
+        }
+        
+        .content-section h3 {
+            margin-top: 2.5rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        /* Author link styling */
+        .author-block a {
+            color: #363636;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .author-block a:hover {
+            color: var(--mgt-red);
+            border-bottom-color: var(--mgt-red);
+        }
+        
+        /* Enhanced abstract section */
+        .abstract-section {
+            padding: 3rem 0 2rem 0;
+        }
+        
+        /* Method overview enhancements */
+        .method-section {
+            padding: 2.5rem 0;
+        }
+        
+        /* Dataset section styling */
+        .dataset-section {
+            padding: 2.5rem 0;
+        }
+        
+        .dataset-stats {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 1rem;
+        }
+        
+        .dataset-stats ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+        
+        /* Results section */
+        .results-section {
+            padding: 2.5rem 0;
+        }
+        
+        .results-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Enhanced typography */
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+        
+        /* Button enhancements */
+        .publication-links .button {
+            margin: 0.3rem;
+            transition: all 0.2s ease;
+        }
+        
+        .publication-links .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .figure-caption {
+                font-size: 0.85em;
+                padding: 0 0.5rem;
+            }
+            
+            .main-figure {
+                margin: 1.5rem 0 1rem 0;
+            }
+            
+            .content-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/index.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.1.1/gradio.js"></script>
+</head>
+
+<body>
+
+    <section class="hero banner">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title"><i class="pixart-alpha-icon"></i>EditMGT<br />
+                            Unleashing the Potential of Masked Generative Transformer in Image Editing</h1>
+                        <!-- <h1 class="title is-4 publication-title">
+                            ICLR 2024 Spotlight</h1> -->
+                        <div class="is-size-5 publication-authors">
+                            <!-- Paper authors -->
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=br7-IGkAAAAJ&hl=zh-CN" target="_blank">Wei
+                                    Chow</a><sup>1,*</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=noWaiKgAAAAJ&hl=en" target="_blank">Linfeng
+                                    Li</a><sup>1,*</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://ldkong.com/" target="_blank">Lingdong Kong</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Zefeng Li</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Qi Xu</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Hang Song</a><sup>1</sup>,
+                            </span>
+                            <br>
+                            <span class="author-block">
+                                <a href="https://owen718.github.io/" target="_blank">Tian Ye</a><sup>4</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Xian Wang</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Jinbin Bai</a><sup>3</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Shilin Xu</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Xiangtai Li</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Junting Pan</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Shaoteng Liu</a><sup>1</sup>,
+                            </span>
+                            <br>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=39enosUAAAAJ&hl=en" target="_blank">Ran Zhou</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://weichow23.github.io/editmgt/" target="_blank">Tianshu Yang</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://huage001.github.io/" target="_blank">Songhua Liu</a><sup>2</sup>,
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>ByteDance,</span>
+                            <span class="author-block"><sup>2</sup>Shanghai Jiatong University,</span>
+                            <span class="author-block"><sup>3</sup>National University of Singapore,</span>
+                            <span class="author-block"><sup>4</sup>The Hong Kong University of Science and
+                                Technology (Guangzhou)</span>
+                            <span class="eql-cntrb"><small><br><sup>*</sup>Equal contribution.</small></span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <span class="link-block">
+                                    <a href="" target="_blank"
+                                        class="external-link button is-normal is-rounded is-white">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv (Soon)</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="" target="_blank"
+                                        class="external-link button is-normal is-rounded is-white">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code (Soon)</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="" target="_blank"
+                                        class="external-link button is-normal is-rounded is-white">
+                                        <span class="icon">🤗</span>
+                                        <span>Datasets (Soon)</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="" target="_blank"
+                                        class="external-link button is-normal is-rounded is-white">
+                                        <span class="icon">🧨</span>
+                                        <span>Models (Soon)</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light abstract-section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    
+                    <!-- Enhanced teaser image -->
+                    <div class="main-figure">
+                        <img loading="lazy" src="static/images/teaser.png" alt="EditMGT Overview" />
+                        <div class="figure-caption">
+                            <strong>Figure 1:</strong> Overview of <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span> and Crisp-2M. <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>, the first MGT-based model, performs editing in 2s with 960M parameters, 6× faster than models of comparable performance; Crisp-2M provides 2M high-resolution (≥1024) editing samples spanning 7 distinct categories.
+                        </div>
+                    </div>
+                    
+                    <div class="content has-text-justified">
+                        <p>
+                            Recent advances in diffusion models (DMs) have achieved exceptional visual quality in image editing tasks. However, the global denoising dynamics of DMs inherently conflate local editing targets with the full-image context, leading to unintended modifications in non-target regions. 
+                            In this paper, we shift our attention beyond DMs and turn to Masked Generative Transformers (MGTs) as an alternative approach to tackle this challenge. 
+                            By predicting multiple masked tokens rather than holistic refinement, MGTs exhibit a localized decoding paradigm that endows them with the inherent capacity to explicitly preserve non-relevant regions during the editing process. 
+                            Building upon this insight, we introduce the first MGT-based image editing framework, termed <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>. 
+                            We first demonstrate that MGT's cross-attention maps provide informative localization signals for localizing edit-relevant regions and devise a <em>multi-layer attention consolidation</em> scheme that refines these maps to achieve fine-grained and precise localization.
+                            On top of these adaptive localization results, we introduce <em>region-hold sampling</em>, which restricts token flipping within low-attention areas to suppress spurious edits, thereby confining modifications to the intended target regions and preserving the integrity of surrounding non-target areas. 
+                            To train <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>, we construct Crisp-2M, a high-resolution (≥1024) dataset spanning seven diverse editing categories. 
+                            Without introducing additional parameters, we adapt a pre-trained text-to-image MGT into an image editing model through attention injection. 
+                            Extensive experiments across four standard benchmarks demonstrate that, with fewer than 1B parameters, our model achieves state-of-the-art image similarity performance while enabling 6× faster editing. 
+                            Moreover, it delivers comparable or superior editing quality, with improvements of 3.6% and 17.6% on style change and style transfer tasks, respectively.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End paper abstract -->
+
+    <!-- Method Overview -->
+    <section class="hero is-small method-section">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <h2 class="title is-3">Method Overview</h2>
+                <p>We present <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>, the first MGT-based image editing framework that leverages attention injection for parameter-free adaptation from text-to-image generation to image editing.</p>
+                
+                <div class="method-figure">
+                    <img loading="lazy" src="static/images/framework.png" alt="Method Framework" />
+                    <div class="figure-caption">
+                        <strong>Figure 2:</strong> Overview of <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>. Our approach supervises edited image generation through original image attention injection. The right panel illustrates token-wise interactions within the multi-modal transformer block.
+                    </div>
+                </div>
+                
+                <h3 class="title is-4">Architecture</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        Our approach introduces image conditional integration through attention injection. We define image condition tokens C_V that share parameters with image tokens C_I but maintain a fixed timestep at zero throughout the process. This design prevents drift while maintaining stable conditioning signals.
+                    </p>
+                    <p>
+                        We introduce a bias term ℰ into the attention weight to control the strength of conditioning during inference, enabling seamless transformation from text-to-image to editing without additional parameters.
+                    </p>
+                </div>
+
+                <h3 class="title is-4">Inference Process</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        <strong>Multi-layer Attention Consolidation:</strong> We aggregate attention weights from coherent single-modality processing layers and apply adaptive filtering to enhance clarity and spatial precision.
+                    </p>
+                    <p>
+                        <strong>Region-Hold Sampling:</strong> We preserve unmodified regions by explicitly flipping low-attention areas back to their original tokens, using a threshold λ to control the flipping frequency and maintain consistency with the source image.
+                    </p>
+                </div>
+                
+                <div class="method-figure">
+                    <img loading="lazy" src="static/images/module.png" alt="Attention Mechanism" />
+                    <div class="figure-caption">
+                        <strong>Figure 3:</strong> Attention Mechanism in <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>. The text-to-image attention maps encode rich semantic correspondences. We enhance their clarity through stacking and filtering operations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset -->
+    <section class="hero is-small is-light dataset-section">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <h2 class="title is-3">Crisp-2M Dataset</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We construct Crisp-2M, a high-resolution image editing dataset spanning 7 distinct categories with 2M samples (short edge ≥ 1024 pixels). Combined with additional high-resolution samples, we utilize 4M total samples for training. This dataset addresses the scarcity of high-quality, high-resolution image editing data, which is crucial for training effective editing models.
+                    </p>
+                </div>
+                
+                <h3 class="title is-4">Data Collection Pipeline</h3>
+                <div class="dataset-figure">
+                    <img loading="lazy" src="static/images/pipe.png" alt="Data Pipeline" />
+                    <div class="figure-caption">
+                        <strong>Figure 4:</strong> Overview of the Crisp-2M dataset collection pipeline. The construction encompasses 4 stages: Image Curation, Customized Instruction Generation, Specific Edit Pipeline, and Data Quality Assurance.
+                    </div>
+                </div>
+                
+                <div class="content has-text-justified">
+                    <p>
+                        <strong>Stage 1: Image Curation.</strong> We curate high-quality images from three sources: LAION-Aesthetics, Unsplash Lite datasets, and JourneyDB (FLUX re-generated version). Through systematic filtering based on aesthetic scores above 4.5, resolution requirements (short-side dimensions exceeding 1024 pixels), and content suitability assessment using Qwen3, we obtain approximately 5.5M samples. We employ rigorous filtering to exclude simple patterns, monotonous compositions, and images containing watermarks or text overlays.
+                    </p>
+                    <p>
+                        <strong>Stage 2: Customized Instruction Generation.</strong> To enhance data quality and diversity, we propose a systematic two-stage framework. First, we employ Qwen2.5-VL to produce detailed image captions that explicitly delineate background elements, foreground objects, and their semantic attributes. The second stage leverages GPT-4o to systematically transform these descriptive captions into actionable editing instructions across multiple modalities. We implement an iterative self-refinement mechanism that progressively enhances instruction complexity and linguistic diversity.
+                    </p>
+                    <p>
+                        <strong>Stage 3: Specific Edit Pipeline.</strong> Our data collection pipeline leverages state-of-the-art models including FLUX.1 Kontext and Step1X-Edit v1.2, subsequently employing VLMs to select superior results. This approach enhances data quality while enriching dataset diversity compared to traditional single-model approaches.
+                    </p>
+                    <p>
+                        <strong>Stage 4: Data Quality Assurance.</strong> We establish a comprehensive two-stage filtering framework: (1) Pre-processing instruction validation to identify semantic inconsistencies and logical inconsistencies in LLM-generated instructions; (2) Post-processing quality verification using CLIP-based alignment metrics to ensure semantic correspondence between edited images and target descriptions, and visual similarity metrics to verify preservation of non-target content.
+                    </p>
+                </div>
+                
+                <div class="columns">
+                    <div class="column">
+                        <div class="dataset-stats">
+                            <h4 class="title is-5">Dataset Statistics</h4>
+                            <ul>
+                                <li><strong>Add:</strong> ~300k samples</li>
+                                <li><strong>Replace:</strong> ~300k samples</li>
+                                <li><strong>Remove:</strong> ~300k samples</li>
+                                <li><strong>Color alteration:</strong> ~500k samples</li>
+                                <li><strong>Background change:</strong> ~200k samples</li>
+                                <li><strong>Style transformation:</strong> ~400k samples</li>
+                                <li><strong>Motion modification:</strong> ~34k samples</li>
+                            </ul>
+                            <p style="margin-top: 1rem;">
+                                <strong>Key Features:</strong> The dataset is optimized for high-resolution editing tasks, with images predominantly concentrated within the [1280, 1665) pixel range for the longer dimension. This high-resolution nature ensures that our model can handle detailed editing tasks while maintaining image quality.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="dataset-figure">
+                            <img loading="lazy" src="static/images/stat.png" alt="Dataset Statistics" />
+                            <div class="figure-caption">
+                                <strong>Figure 5:</strong> (a) Resolution interval distribution of Crisp-2M. (b) Pie chart of data types in the Crisp-2M dataset across seven editing categories.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiments -->
+    <section class="hero is-small results-section">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <h2 class="title is-3">Experimental Results</h2>
+                
+                <h3 class="title is-4">Quantitative Results</h3>
+                <div class="content has-text-justified">
+                    <p>We evaluate <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span> on four benchmarks: Emu Edit, MagicBrush, AnyBench, and GEdit-EN-full. Our model achieves state-of-the-art performance in image similarity while maintaining strong instruction adherence.
+                    </p>
+                </div>
+                
+                <div class="columns">
+                    <div class="column">
+                        <div class="dataset-stats">
+                            <h4 class="title is-5">Key Results</h4>
+                            <ul>
+                                <li><strong>CLIP Image Similarity:</strong> SOTA on all benchmarks with 1.1% improvement on MagicBrush</li>
+                                <li><strong>Style Transfer:</strong> 17.6% improvement over FluxKontext.dev</li>
+                                <li><strong>Style Change:</strong> 3.6% improvement over second-best method</li>
+                                <li><strong>Model Size:</strong> Only 960MB parameters vs. 2-8× larger baselines</li>
+                                <li><strong>Speed:</strong> 6× faster editing compared to diffusion models</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="result-figure">
+                            <img loading="lazy" src="static/images/anybench.png" alt="AnyBench Results" />
+                            <div class="figure-caption">
+                                <strong>Figure 6:</strong> (a) AnyBench (local part) Results on DINOv2 scores. (b) AnyBench (global part and implicit part) Results on DINOv2 scores. (c) Ablation study on the dataset scale effects.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="title is-4">Attention Visualization</h3>
+                <div class="content has-text-justified">
+                    <p>
+                        The relationship between edited images and threshold λ shows how our region-hold sampling effectively controls the extent of editing while preserving non-target regions.
+                    </p>
+                </div>
+                <div class="result-figure">
+                    <img loading="lazy" src="static/images/local.png" alt="Attention Analysis" />
+                    <div class="figure-caption">
+                        <strong>Figure 7:</strong> Visualizations of editing results, GEdit Bench semantic scores, and L1 distances from original images across varying threshold λ. The relationship demonstrates how region-hold sampling controls editing extent.
+                    </div>
+                </div>
+
+                <h3 class="title is-4">Qualitative Comparisons</h3>
+                <p>Visual comparisons demonstrate <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span>'s superior instruction comprehension, object attribute understanding, and structural preservation capabilities.</p>
+                <div class="result-figure">
+                    <img loading="lazy" src="static/images/visualization.png" alt="Qualitative Results" />
+                    <div class="figure-caption">
+                        <strong>Figure 8:</strong> Qualitative comparisons between <span class="editmgt-title"><span class="edit-part">Edit</span><span class="m-part">M</span><span class="g-part">G</span><span class="t-part">T</span></span> and other open-source editing models. Our model demonstrates superior instruction comprehension and object attribute understanding.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>
+
+            </code></pre>
+        </div>
+    </section>
+    <!--End BibTex citation -->
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This page was built using the <a
+                                href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                            You are free to borrow the of this website, we just ask that you link back to this page in
+                            the footer. <br> This website is licensed under a <a rel="license"
+                                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                        <p class="has-text-centered">Total clicks: <span id="busuanzi_value_site_pv"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
